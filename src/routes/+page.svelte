@@ -3,7 +3,7 @@
 
   export let data
 
-  let loading = false
+  let state = "idle"
 </script>
 
 <h1>
@@ -11,17 +11,19 @@
 </h1>
 
 <form action="/" method=post use:enhance={() => {
-  loading = true
+  state = "loading"
 	return async ({update, result}) => {
+    // wait for the data to be reloaded
 		await update();
-		loading = false
+    // then clear the loading state
+		state = "idle"
 	}
 }}>
   <button type="submit">Submit</button>
 </form>
 
 <p>
-  {#if loading}
+  {#if state == "loading"}
     Loading...
   {:else}
     Time on the server: {data.time}
