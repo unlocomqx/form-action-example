@@ -1,7 +1,7 @@
 <script>
   import {enhance} from "$app/forms"
 
-  export let data;
+  export let data
 
   let loading = false
 </script>
@@ -10,12 +10,10 @@
   Form action
 </h1>
 
-<form method=post action="/" use:enhance={() => {
+<form action="/" method=post use:enhance={() => {
   loading = true
 	return async ({update, result}) => {
-		if(result.type === "success") {
-			await update();
-		}
+		await update();
 		loading = false
 	}
 }}>
